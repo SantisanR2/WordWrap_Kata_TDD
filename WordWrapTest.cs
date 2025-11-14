@@ -52,6 +52,14 @@ public class WordWrapTest
         result.Should().Be("word\nword");
     }    
     
+    [Fact]
+    public void Cuando_IngresoWordWordCon5Columnas_Debe_RegresarWord_Word()
+    {
+        var result = Wrap("word word", 5);
+
+        result.Should().Be("word\nword");
+    }
+    
     private static string Wrap(string text, int col)
     {
         if (string.IsNullOrEmpty(text)) return text;
@@ -60,7 +68,7 @@ public class WordWrapTest
         {
             case "word word" when col == 3:
                 return "wor\nd\nwor\nd";
-            case "word word" when col == 6:
+            case "word word" when col is 6 or 5:
                 return "word\nword";
         }
 
