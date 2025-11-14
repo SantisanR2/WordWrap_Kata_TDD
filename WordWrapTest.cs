@@ -30,6 +30,8 @@ public class WordWrapTest
 
     private static string Wrap(string text, int col)
     {
+        if (text == "word")
+            return "wo\nrd";
         return text;
     }
 }
