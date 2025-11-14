@@ -68,6 +68,14 @@ public class WordWrapTest
         result.Should().Be("word\nword\nword");
     }
     
+    [Fact]
+    public void Cuando_IngresoWordWordWordCon11Columnas_Debe_RegresarWordWord_Word()
+    {
+        var result = Wrap("word word word", 11);
+
+        result.Should().Be("word word\nword");
+    }
+    
     private static string Wrap(string text, int col)
     {
         if (string.IsNullOrEmpty(text)) return text;
