@@ -71,21 +71,23 @@ public class WordWrapTest
     private static string Wrap(string text, int col)
     {
         if (string.IsNullOrEmpty(text)) return text;
-    
-        switch (text)
-        {
-            case "word word" when col == 3:
-                return "wor\nd\nwor\nd";
-            case "word word" when col is 6 or 5:
-                return "word\nword";
-        }
 
         var result = new List<string>();
         var position = 0;
-    
+
         while (position < text.Length)
         {
             var length = Math.Min(col, text.Length - position);
+        
+            var spaceIndex = text.IndexOf(' ', position, length);
+
+            var areSpacesAndAreLessThanColumn = spaceIndex >= 0 && spaceIndex < position + length;
+            
+            if (areSpacesAndAreLessThanColumn)
+            {
+                length = spaceIndex - position;
+            }
+        
             var line = text.Substring(position, length);
         
             result.Add(line);
@@ -96,7 +98,7 @@ public class WordWrapTest
                 position++;
             }
         }
-    
+
         return string.Join("\n", result);
     }
 }
