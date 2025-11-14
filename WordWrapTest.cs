@@ -86,14 +86,17 @@ public class WordWrapTest
         while (position < text.Length)
         {
             var length = Math.Min(col, text.Length - position);
-        
-            var spaceIndex = text.IndexOf(' ', position, length);
 
-            var areSpacesAndAreLessThanColumn = spaceIndex >= 0 && spaceIndex < position + length;
+            var isSpaceEnough = position + length < text.Length;
             
-            if (areSpacesAndAreLessThanColumn)
+            if (isSpaceEnough)
             {
-                length = spaceIndex - position;
+                var lastSpaceIndex = text.LastIndexOf(' ', position + length - 1, length);
+            
+                if (lastSpaceIndex >= position)
+                {
+                    length = lastSpaceIndex - position;
+                }
             }
         
             var line = text.Substring(position, length);
