@@ -1,9 +1,19 @@
-﻿namespace WordWrap;
+﻿using AwesomeAssertions;
 
-public class UnitTest1
+namespace WordWrap;
+
+public class WordWrapTest
 {
     [Fact]
-    public void Test1()
+    public void Cuando_IngresoUnaPalabraVaciaCon1Columna_Debe_RegresarLaPalabraVacia()
     {
+        var result = Wrap("", 1);
+
+        result.Should().Be("");
+    }
+
+    private static string Wrap(string text, int col)
+    {
+        return "";
     }
 }
