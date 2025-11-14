@@ -35,6 +35,14 @@ public class WordWrapTest
 
         result.Should().Be("abc\ndef\nghi\nj");
     }
+    
+    [Fact]
+    public void Cuando_IngresoWordWordCon3Columnas_Debe_RegresarWor_d_Wor_d()
+    {
+        var result = Wrap("word word", 3);
+
+        result.Should().Be("wor\nd\nwor\nd");
+    }
 
     private static string Wrap(string text, int col)
     {
