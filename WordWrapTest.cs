@@ -11,6 +11,14 @@ public class WordWrapTest
 
         result.Should().Be("");
     }
+    
+    [Fact]
+    public void Cuando_IngresoThisCon01Columnas_Debe_RegresarThis()
+    {
+        var result = Wrap("this", 10);
+
+        result.Should().Be("this");
+    }  
 
     private static string Wrap(string text, int col)
     {
