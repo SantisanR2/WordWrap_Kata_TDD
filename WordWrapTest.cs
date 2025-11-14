@@ -47,15 +47,34 @@ public class WordWrapTest
     private static string Wrap(string text, int col)
     {
         if (string.IsNullOrEmpty(text)) return text;
-    
+
         var result = new List<string>();
-    
-        for (int i = 0; i < text.Length; i += col)
+        var position = 0;
+
+        while (position < text.Length)
         {
-            var length = Math.Min(col, text.Length - i);
-            result.Add(text.Substring(i, length));
+            var length = Math.Min(col, text.Length - position);
+        
+            var spaceIndex = text.IndexOf(' ', position, length);
+
+            var areSpacesAndAreLessThanColumn = spaceIndex >= 0 && spaceIndex < position + length;
+            
+            if (areSpacesAndAreLessThanColumn)
+            {
+                length = spaceIndex - position;
+            }
+        
+            var line = text.Substring(position, length);
+        
+            result.Add(line);
+            position += length;
+        
+            while (position < text.Length && text[position] == ' ')
+            {
+                position++;
+            }
         }
-    
+
         return string.Join("\n", result);
     }
 }
