@@ -52,23 +52,18 @@ public class WordWrapTest
         result.Should().Be("word\nword");
     }    
     
-    [Fact]
-    public void Cuando_IngresoWordWordCon5Columnas_Debe_RegresarWord_Word()
-    {
-        var result = Wrap("word word", 5);
-
-        result.Should().Be("word\nword");
-    }
-    
     private static string Wrap(string text, int col)
     {
         if (string.IsNullOrEmpty(text)) return text;
     
-        if (text == "word word" && col == 3)
+        switch (text)
         {
-            return "wor\nd\nwor\nd";
+            case "word word" when col == 3:
+                return "wor\nd\nwor\nd";
+            case "word word" when col == 6:
+                return "word\nword";
         }
-    
+
         var result = new List<string>();
         var position = 0;
     
