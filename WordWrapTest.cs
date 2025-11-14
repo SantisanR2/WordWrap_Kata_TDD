@@ -27,11 +27,27 @@ public class WordWrapTest
 
         result.Should().Be("wo\nrd");
     }
+    
+    [Fact]
+    public void Cuando_IngresoAbcdefghijCon3Columnas_Debe_RegresarAbc_def_ghi_j()
+    {
+        var result = Wrap("abcdefghij", 3);
+
+        result.Should().Be("abc\ndef\nghi\nj");
+    }
 
     private static string Wrap(string text, int col)
     {
-        if (text == "word")
-            return "wo\nrd";
-        return text;
+        if (string.IsNullOrEmpty(text)) return text;
+    
+        var result = new List<string>();
+    
+        for (int i = 0; i < text.Length; i += col)
+        {
+            var length = Math.Min(col, text.Length - i);
+            result.Add(text.Substring(i, length));
+        }
+    
+        return string.Join("\n", result);
     }
 }
